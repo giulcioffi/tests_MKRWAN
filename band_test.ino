@@ -1,16 +1,13 @@
 /*
-  First Configuration
-  This sketch demonstrates the usage of MKR WAN 1300/1310 LoRa module.
-  This example code is in the public domain.
+  band_test
+  This test demonstrates the capability to change frequency band
+  at runtime for MKR WAN 1300/1310 LoRa module.
 */
-//#define LORA_DEBUG Serial
 
 #include <MKRWAN.h>
 
 LoRaModem modem;
 
-// Uncomment if using the Murata chip as a module
-// LoRaModem modem(Serial1);
 _lora_band reg_band;
 
 String region;
@@ -39,78 +36,8 @@ void setup() {
   Serial.println("IN865    |     866550000");
   Serial.println("US915    |     923300000");
   Serial.println("RU864    |     869100000");
-  
-  /*
-  Serial.print("Your module version is: ");
-  Serial.println(modem.version());
-  Serial.print("Your device EUI is: ");
-  Serial.println(modem.deviceEUI());
-
-  int mode = 0;
-  while (mode != 1 && mode != 2) {
-    Serial.println("Are you connecting via OTAA (1) or ABP (2)?");
-    while (!Serial.available());
-    mode = Serial.readStringUntil('\n').toInt();
-  }
-
-  int connected;
-  if (mode == 1) {
-    Serial.println("Enter your APP EUI");
-    while (!Serial.available());
-    appEui = Serial.readStringUntil('\n');
-
-    Serial.println("Enter your APP KEY");
-    while (!Serial.available());
-    appKey = Serial.readStringUntil('\n');
-
-    appKey.trim();
-    appEui.trim();
-
-    Serial.println("Joining OTAA");
-    connected = modem.joinOTAA(appEui, appKey);
-  } else if (mode == 2) {
-
-    Serial.println("Enter your Device Address");
-    while (!Serial.available());
-    devAddr = Serial.readStringUntil('\n');
-
-    Serial.println("Enter your NWS KEY");
-    while (!Serial.available());
-    nwkSKey = Serial.readStringUntil('\n');
-
-    Serial.println("Enter your APP SKEY");
-    while (!Serial.available());
-    appSKey = Serial.readStringUntil('\n');
-
-    devAddr.trim();
-    nwkSKey.trim();
-    appSKey.trim();
-
-    connected = modem.joinABP(devAddr, nwkSKey, appSKey);
-  }
-
-  /*
-  if (!connected) {
-    Serial.println("Something went wrong; are you indoor? Move near a window and retry");
-    while (1) {}
-  }
-  */
-
-  /*
-  delay(5000);
-
-  int err;
-  modem.setPort(3);   //deleted by me
-  modem.beginPacket();
-  modem.print("HeLoRA world!");
-  err = modem.endPacket(true);
-  if (err > 0) {
-    Serial.println("Message sent correctly!");
-  } else {
-    Serial.println("Error sending message :(");
-  }
-  */
 }
+
 
 void loop() {
   Serial.println("Select the desired region:");
@@ -201,11 +128,4 @@ void loop() {
 
   delay(1000);
 
-/*  
-  //Serial.println("Here");
-  while (modem.available()) {
-    Serial.write(modem.read());
-  }
-  modem.poll();
-  */
 }
